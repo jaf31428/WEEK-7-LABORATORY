@@ -1,0 +1,16 @@
+/*Activity 3: Preventing SQL Injection Attacks on Large Datasets*/
+/*Step 4: Understanding SQL Injection Risks*/
+
+/*1.Simulate an SQL Injection Attack*/
+/*Observe how an attacker can retrieve all account details.*/
+SELECT * FROM Accounts WHERE AccountID = '' OR 1=1;
+
+/*2.Mitigate SQL Injection using Prepared Statements*/
+/*Use prepared statements in application-level programming to prevent direct query manipulation.*/
+PREPARE stmt FROM 'SELECT * FROM Accounts WHERE AccountHolder = ?';
+SET @holder = 'Alice Johnson';
+EXECUTE stmt USING @holder;
+DEALLOCATE PREPARE stmt;
+
+/*3.Use input validation techniques*/
+/*Always validate and sanitize user input in applications interacting with MySQL.*/
